@@ -10,7 +10,7 @@ import java.util.ArrayList;
  *
  * @author SALA I
  */
-public abstract class Cuentas {
+public class Cuentas extends Menus {
     protected String nombreCliente;
     protected ArrayList<Menus> listadoCartas = new ArrayList<>();
     protected double valorCancelar;
@@ -31,8 +31,11 @@ public abstract class Cuentas {
     public void establecerValorCancelar(double v) {
         valorCancelar = v;
     }
-    public void establecerSubtotal(double s) {
-        subtotal = s;
+    public void establecerSubtotal() {
+        for (int i = 0; i < listadoCartas.size(); i++) {
+            subtotal += listadoCartas.get(i).valorMenu;
+        }
+        
     }
     public void establecerIva(double i) {
         iva = i;
@@ -45,6 +48,32 @@ public abstract class Cuentas {
         return listadoCartas;
     }
     public double obtenerValorCancelar() {
-        return listadoCartas;
+        return valorCancelar;
+    }
+    public double obtenerSubtotal() {
+        return subtotal;
+    }
+    public double obtenerIva() {
+        return iva;
+    }
+    @Override
+    public String toString() {
+        String cadena = String.format("Factura\n"
+                + "Cliente: %s\n",obtenerNombreCliente()
+                + "Menu del Dia\n\n", obtenerNombre());
+
+        for (int i = 0; i < obtenerArriendos().size(); i++) {
+            cadena = String.format("%s"
+                    + "%s\n",
+                    cadena,
+                    obtenerArriendos().get(i));
+        }
+
+        cadena = String.format("\n%sTotal Arriendos base Mensual: %.2f\n"
+                + "Total Arriendos Mensual: %.2f\n",
+                cadena,
+                obtenerTotalArriendosBaseMensual(),
+                obtenerTotalArriendosFinalMensual());
+        return cadena;
     }
 }
