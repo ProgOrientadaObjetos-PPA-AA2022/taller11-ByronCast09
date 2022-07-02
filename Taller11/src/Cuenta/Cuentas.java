@@ -10,17 +10,19 @@ import java.util.ArrayList;
  *
  * @author SALA I
  */
-public class Cuentas extends Menus {
+public class Cuentas{
     protected String nombreCliente;
     protected ArrayList<Menus> listadoCartas = new ArrayList<>();
     protected double valorCancelar;
     protected double subtotal;
     protected double iva;
     
-    public Cuentas(String n, ArrayList<Menus> lista) {
+    public Cuentas(String n, ArrayList<Menus> lista,double iv) {
         nombreCliente = n;
         listadoCartas = lista;
+        iva =iv;
     }
+
     
     public void establecerNombreCliente(String n) {
         nombreCliente = n;
@@ -28,8 +30,8 @@ public class Cuentas extends Menus {
     public void establecerListadoCartas(ArrayList<Menus> l) {
         listadoCartas = l;
     }
-    public void establecerValorCancelar(double v) {
-        valorCancelar = v;
+    public void calcularValorCancelar() {
+        valorCancelar = subtotal+((iva * subtotal)/100);
     }
     public void establecerSubtotal() {
         for (int i = 0; i < listadoCartas.size(); i++) {
@@ -60,20 +62,20 @@ public class Cuentas extends Menus {
     public String toString() {
         String cadena = String.format("Factura\n"
                 + "Cliente: %s\n",obtenerNombreCliente()
-                + "Menu del Dia\n\n", obtenerNombre());
+                + "Menu del Dia\n\n");
 
-        for (int i = 0; i < obtenerArriendos().size(); i++) {
+        for (int i = 0; i < obtenerListadoCartas().size(); i++) {
             cadena = String.format("%s"
                     + "%s\n",
                     cadena,
-                    obtenerArriendos().get(i));
+                    obtenerListadoCartas().get(i));
         }
 
-        cadena = String.format("\n%sTotal Arriendos base Mensual: %.2f\n"
-                + "Total Arriendos Mensual: %.2f\n",
+        cadena = String.format("\n%s"+"Subtotal:%.2f\n"+"Iva: %.2f\n"+"Total a pagar:%.2f\n",
                 cadena,
-                obtenerTotalArriendosBaseMensual(),
-                obtenerTotalArriendosFinalMensual());
+                obtenerSubtotal(),
+                obtenerIva(),
+                obtenerValorCancelar());
         return cadena;
     }
 }

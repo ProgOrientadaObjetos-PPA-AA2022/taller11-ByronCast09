@@ -5,6 +5,14 @@
  */
 package paquete01;
 
+import Cuenta.Cuentas;
+import Cuenta.Menus;
+import MenusOpc.MenuCarta;
+import MenusOpc.MenuEconomico;
+import MenusOpc.MenuNiño;
+import MenusOpc.MenudelDia;
+import java.util.ArrayList;
+
 /**
  *
  * @author reroes
@@ -16,6 +24,39 @@ public class Ejecutor01 {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        ArrayList<Menus> listadoCartas = new ArrayList<>();
+        
+        MenuNiño menN1 = new MenuNiño("Niños 01",2.00,1.00,1.50);
+        menN1.calcularValorTotal();
+        
+        MenuNiño menN2 = new MenuNiño("Niños 02",3.00,1.00,1.50);
+        menN1.calcularValorTotal();
+        listadoCartas.add(menN1);
+        listadoCartas.add(menN2);
+        //----------------------------------------
+        MenuEconomico menE = new MenuEconomico("Econo 001",4.00,25.00);
+        menE.calcularValorTotal();
+        listadoCartas.add(menE);
+        //-----------------------------------------
+        MenudelDia menD = new MenudelDia("Dia 001",5.00,1.00,1.00);
+        menD.calcularValorTotal();
+        listadoCartas.add(menD);
+        //-------------------------------------
+        MenuCarta menCar = new MenuCarta("Carta001",6.00,1.50,2.00,10.00);
+        menCar.calcularValorTotal();
+        listadoCartas.add(menCar);
+        //---------------------------------------------
+        Cuentas cuent = new Cuentas("Byron Castillo",listadoCartas,10);
+        cuent.establecerSubtotal();
+        cuent.calcularValorCancelar();
+        System.out.print(cuent);
+        
+        
+        
+        
+        
+        
+        
     }
     
     

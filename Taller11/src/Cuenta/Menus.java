@@ -14,17 +14,16 @@ public abstract class Menus {
     protected double valorInicialMenu;
     
 
-    public Menus(String nombreP, double valorM, double valorInicialM) {
+    public Menus(String nombreP, double valorM) {
         this.nombrePlato = nombreP;
-        this.valorMenu = valorM;
-        this.valorInicialMenu = valorInicialM;
+        this.valorInicialMenu = valorM;
         
     }
     public void establecerNombrePlato(String n) {
         nombrePlato = n;
     }
-    public void establecerValorMenu(double n) {
-        valorMenu = n;
+    public void establecerValorMenu(double e) {
+        valorMenu = e;
     }
     public void establecerValorInicial(double n) {
         valorInicialMenu = n;
@@ -40,7 +39,7 @@ public abstract class Menus {
     public double obtenerValorInicial() {
         return valorInicialMenu;
     }
-    
+    public abstract void calcularValorTotal();
     @Override
     public String toString(){
         String cadena = String.format("Plato: %s\n"

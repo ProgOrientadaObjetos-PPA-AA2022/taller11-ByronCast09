@@ -15,9 +15,9 @@ public class MenuCarta extends Menus{
     protected double valorBebida;
     protected double porcetajeAdicional;
     
-    public MenuCarta(String nombreP, double valorM, double valorInicialM,double valPor,
+    public MenuCarta(String nombreP, double valorInicialM,double valPor,
             double valBeb, double porAd) {
-        super(nombreP,valorM,valorInicialM);
+        super(nombreP,valorInicialM);
         valorPorcion= valPor;
         valorBebida = valBeb;
         porcetajeAdicional = porAd;
@@ -28,8 +28,17 @@ public class MenuCarta extends Menus{
     public void establecerValorBebida(double e){
         valorBebida = e;
     }
-    public void establecerPorcentajeAdicional(double e){
-        porcetajeAdicional = e;
+    public void establecerPorcentajeAdicional(double porcA){
+        porcetajeAdicional = porcA;
+        //porcetajeAdicional = (valorInicialMenu)*porcetajeAdicional/100;
+    }
+    @Override
+    public void calcularValorTotal() {
+        valorMenu = valorInicialMenu + valorPorcion+ valorBebida;
+        valorMenu =  valorMenu+((porcetajeAdicional*valorMenu)/100);
+    }
+    public double obtenerValorcancelartotal() {
+        return valorMenu;
     }
     public double obtenerValorPorcion(){
         return valorPorcion;
@@ -50,10 +59,11 @@ public class MenuCarta extends Menus{
                 + "Porcentaje Adicional: %.2f\n"
                 + "Valor del Menu %.2f\n", 
                 obtenerNombrePlato(),
-                obtenertValorInicial(),
-                obtenerValorHelado(),
-                obtenerValorPastel(),
-                obtenertValorMenu());
+                obtenerValorInicial(),
+                obtenerValorPorcion(),
+                obtenerValorBebida(),
+                obtenerPorcentajeAdicional(),
+                obtenerValorMenu());
         return cadena;
     }
 }   

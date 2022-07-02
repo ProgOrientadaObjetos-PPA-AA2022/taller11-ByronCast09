@@ -5,6 +5,12 @@
  */
 package paquete01;
 
+import Cuenta.Cuentas;
+import Cuenta.Menus;
+import MenusOpc.MenuCarta;
+import MenusOpc.MenuEconomico;
+import MenusOpc.MenuNiño;
+import MenusOpc.MenudelDia;
 import java.util.ArrayList;
 
 /**
@@ -37,25 +43,61 @@ public class Ejecutor02 {
                 
         
         // Lista de Menus
-        ArrayList lista = new ArrayList<>();
+        ArrayList<Menus> lista = new ArrayList<>();
         
         /* Agregar un proceso para generar objetos de tipo Menu Carta, Día, 
         Economico y Niño*. Cada arreglo datos, se corresponde a un tipo de Menú.
         Iterar y crear los objetos según corresponda. Cada objeto generado, 
         agregar al ArrayList lista*/
         // Inicio de solución
-        
+        for (int i = 0; i < datos001.length; i++) {
+            String nombrePlato = datos001[i][0];
+            double valorMenu = Double.parseDouble(datos001[i][1]);
+            double valorHelado = Double.parseDouble(datos001[i][2]);
+            double valorpastel = Double.parseDouble(datos001[i][3]);
+            MenuNiño menud = new MenuNiño(nombrePlato, valorMenu,
+                    valorHelado, valorpastel);
+            lista.add(menud);
+        }
+        for (int i = 0; i < datos001.length; i++) {
+            String nombrePlato = datos002[i][0];
+            double valorMenu = Double.parseDouble(datos002[i][1]);
+            double descuento = Double.parseDouble(datos002[i][2]);
+
+            MenuEconomico menuEcono = new MenuEconomico(nombrePlato,
+                    valorMenu, descuento);
+            lista.add(menuEcono);
+        }
+        for (int i = 0; i < datos003.length; i++) {
+            String nombrePlato = datos003[i][0];
+            double valorMenu = Double.parseDouble(datos003[i][1]);
+            double postre = Double.parseDouble(datos003[i][2]);
+            double bebida = Double.parseDouble(datos003[i][3]);
+
+            MenudelDia menud = new MenudelDia(nombrePlato,
+                    valorMenu, postre, bebida);
+            lista.add(menud);
+        }
+        for (int i = 0; i < datos004.length; i++) {
+            String nombrePlato = datos004[i][0];
+            double valorMenu = Double.parseDouble(datos004[i][1]);
+            double valorPorcionGuarnicio = Double.parseDouble(datos004[i][2]);
+            double valorBebida = Double.parseDouble(datos004[i][3]);
+            double porcentaje = Double.parseDouble(datos004[i][4]);
+            MenuCarta menucar = new MenuCarta(nombrePlato,
+                    valorMenu, valorPorcionGuarnicio, valorBebida, porcentaje);
+            lista.add(menucar);
+        }
         // Fin de solución
         
-        
         for (int i = 0; i < lista.size(); i++) {
-            lista.get(i).establecerValorMenu();
+            lista.get(i).calcularValorTotal();
         }
         
         // Un objeto de tipo Cuenta
-        Cuenta miCuenta = new Cuenta("Luis Andrade", lista, 10);
+        Cuentas miCuenta = new Cuentas("Luis Andrade",lista, 10.00);
         miCuenta.establecerSubtotal();
-        miCuenta.establecerValorCancelar();
+        miCuenta.calcularValorCancelar();
         System.out.printf("%s\n", miCuenta);
         
 
